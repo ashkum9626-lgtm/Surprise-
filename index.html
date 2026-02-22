@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vajra Sutra Surprise</title>
+    <style>
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #ffebee; font-family: 'Arial', sans-serif; overflow: hidden; }
+        .screen { position: absolute; display: none; flex-direction: column; align-items: center; text-align: center; width: 90%; max-width: 400px; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: opacity 0.8s ease-in-out; opacity: 0; border: 4px solid #f06292; }
+        .screen.active { display: flex; opacity: 1; }
+        .pixel-img { width: 100%; border-radius: 10px; margin-bottom: 20px; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); }
+        h2 { color: #d81b60; font-size: 1.4rem; margin-bottom: 20px; }
+        .btn { padding: 12px 30px; font-size: 1.1rem; background-color: #e91e63; color: white; border: none; border-radius: 50px; cursor: pointer; transition: transform 0.2s; }
+        .btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" src="songs.mp3" loop></audio>
+
+    <div id="step1" class="screen active">
+        <img src="https://i.postimg.cc/85zK23r1/giftbox.gif" class="pixel-img" alt="Surprise">
+        <h2>Click for Surprise 🎁</h2>
+        <button class="btn" onclick="triggerMagic(1, 2)">Tap Here</button>
+    </div>
+
+    <div id="step2" class="screen">
+        <img src="https://i.postimg.cc/9F7V3Gg0/dance.gif" class="pixel-img" alt="Nanhi Pari">
+        <h2>Itni jldi bhi kya he Nanhi Pari 💃🏽</h2>
+        <button class="btn" onclick="triggerMagic(2, 3)">Agay Chalo</button>
+    </div>
+
+    <div id="step3" class="screen">
+        <img src="https://i.postimg.cc/mD3f0rX6/birthday.gif" class="pixel-img" alt="Happy Birthday">
+        <h2 style="font-size: 1.8rem;">💓Happy Birthday Sweety💓</h2>
+    </div>
+
+    <script>
+        function triggerMagic(current, next) {
+            const currentScreen = document.getElementById('step' + current);
+            const nextScreen = document.getElementById('step' + next);
+            const audio = document.getElementById('bgMusic');
+            if(current === 1) { audio.play().catch(e => console.log("Play logic ready")); }
+            currentScreen.style.opacity = '0';
+            setTimeout(() => {
+                currentScreen.classList.remove('active');
+                nextScreen.classList.add('active');
+                setTimeout(() => { nextScreen.style.opacity = '1'; }, 50);
+            }, 800);
+        }
+    </script>
+</body>
+</html>
