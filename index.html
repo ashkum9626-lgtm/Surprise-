@@ -23,13 +23,16 @@
 
         .active { display: flex; opacity: 1; }
 
-        .overlay {
-            text-align: center;
-            z-index: 10;
-            width: 100%;
-        }
+        .overlay { text-align: center; z-index: 10; width: 100%; }
 
-        /* Plain Text Colors */
+        /* Animation for Emojis */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .animated-emoji { display: inline-block; animation: bounce 1.5s infinite ease-in-out; }
+
+        /* Text Colors & Shadows */
         #step1 h2 { color: #ffffff; } 
         #step2 h2 { color: #fff176; } 
         #step3 h2 { color: #ff80ab; } 
@@ -60,28 +63,28 @@
 
     <div id="step1" class="screen active" style="background-image: url('giftbox.gif');">
         <div class="overlay">
-            <h2>Click for Surprise 🎁</h2>
+            <h2>Click for Surprise <span class="animated-emoji">🎁</span></h2>
             <button class="glass-btn" onclick="next(1, 2)">Tap Here</button>
         </div>
     </div>
 
     <div id="step2" class="screen" style="background-image: url('dance.gif');">
         <div class="overlay">
-            <h2>Itni jldi bhi kya he Nanhi Pari 💃🏽</h2>
+            <h2>Itni jldi bhi kya he Nanhi Pari <span class="animated-emoji">💃🏽</span></h2>
             <button class="glass-btn" onclick="next(2, 3)">Agay Chalo</button>
         </div>
     </div>
 
     <div id="step3" class="screen" style="background-image: url('birthday.gif');">
         <div class="overlay">
-            <h2>Happy Birthday Sweety 💓</h2>
+            <h2><span class="animated-emoji">💓</span> Happy Birthday Sweety <span class="animated-emoji">💓</span></h2>
         </div>
     </div>
 
     <script>
         function next(curr, nxt) {
             const audio = document.getElementById('bgMusic');
-            if(curr === 1) audio.play().catch(() => {});
+            if(curr === 1) audio.play().catch(() => { console.log("Music interaction needed"); });
 
             const c = document.getElementById('step' + curr);
             const n = document.getElementById('step' + nxt);
