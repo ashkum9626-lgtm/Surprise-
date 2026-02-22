@@ -22,10 +22,8 @@
         }
 
         .active { display: flex; opacity: 1; }
-
         .overlay { text-align: center; z-index: 10; width: 100%; }
 
-        /* REAL HEARTBEAT ANIMATION */
         @keyframes heartbeat {
             0% { transform: scale(1); }
             14% { transform: scale(1.3); }
@@ -37,11 +35,10 @@
         .animated-emoji { 
             display: inline-block; 
             animation: heartbeat 1.5s infinite ease-in-out;
-            transform-origin: center; /* Isse upar neeche nahi hoga */
+            transform-origin: center;
             vertical-align: middle;
         }
 
-        /* Text Colors */
         #step1 h2 { color: #ffffff; } 
         #step2 h2 { color: #fff176; } 
         #step3 h2 { color: #ff80ab; } 
@@ -68,7 +65,7 @@
 </head>
 <body>
 
-    <audio id="bgMusic" src="songs.mp3" loop></audio>
+    <audio id="bgMusic" src="songs.mp3" loop preload="auto"></audio>
 
     <div id="step1" class="screen active" style="background-image: url('giftbox.gif');">
         <div class="overlay">
@@ -93,7 +90,15 @@
     <script>
         function next(curr, nxt) {
             const audio = document.getElementById('bgMusic');
-            if(curr === 1) audio.play().catch(() => {});
+            
+            // First click par audio play hoga aur loop ensure karega
+            if(curr === 1) {
+                audio.play().then(() => {
+                    console.log("Dhun shuru ho gayi!");
+                }).catch((e) => {
+                    console.log("Browser ne roka, par next click par chal jayega.");
+                });
+            }
 
             const c = document.getElementById('step' + curr);
             const n = document.getElementById('step' + nxt);
